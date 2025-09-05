@@ -1,5 +1,5 @@
 # Multi-stage build para Frontend Angular
-FROM node:18-alpine AS build
+FROM node:20-alpine AS build
 
 # Establecer directorio de trabajo
 WORKDIR /app
