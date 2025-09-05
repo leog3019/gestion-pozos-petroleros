@@ -68,7 +68,7 @@ gestion_pozos/
 
 ### 1. Clonar el repositorio
 ```bash
-git clone <URL_DEL_REPOSITORIO>
+git clone (https://github.com/leog3019/gestion-pozos-petroleros.git)
 cd gestion_pozos
 ```
 
