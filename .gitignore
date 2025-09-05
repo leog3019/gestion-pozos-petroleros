@@ -82,6 +82,17 @@ frontend/gestion-pozos/.angular/
 frontend/gestion-pozos/tmp/
 frontend/gestion-pozos/out-tsc/
 
+# Scripts de prueba temporales
+test-setup.bat
+*.test.bat
+
+# Archivos de mapa de desarrollo
+*.js.map
+!node_modules/**/*.js.map
+
+# Caché de Angular CLI
+.angular/
+
 # IDE
 .vscode/
 .idea/
