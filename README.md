@@ -244,9 +244,9 @@ Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) par
 
 ## 👨‍💻 Autor
 
-**Tu Nombre**
-- GitHub: [@tu-usuario](https://github.com/tu-usuario)
-- Email: tu.email@ejemplo.com
+**Leonardo Quishpe**
+- GitHub: [@leog3019](https://github.com/leog3019)
+- Email: leonardo.quishpe@epn.edu.ec
 
 ---
 
