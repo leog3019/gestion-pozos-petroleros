@@ -242,6 +242,50 @@ AppComponent
 
 Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para detalles.
 
+## � Ejecución con Docker
+
+### Opción más fácil: Un solo comando
+
+```bash
+# En Windows
+./start-docker.bat
+
+# En Linux/Mac
+./start-docker.sh
+```
+
+### Ejecución manual con Docker Compose
+
+```bash
+# Construir e iniciar todos los servicios
+docker-compose up --build
+
+# Ejecutar en segundo plano
+docker-compose up -d --build
+
+# Ver logs
+docker-compose logs -f
+
+# Detener servicios
+docker-compose down
+
+# Limpiar volúmenes (elimina datos)
+docker-compose down -v
+```
+
+### URLs después del despliegue Docker
+
+- **Frontend**: http://localhost
+- **Backend API**: http://localhost:3000
+- **Base de datos**: localhost:5432
+
+### Ventajas de Docker
+
+✅ **Configuración cero** - No necesitas instalar Node.js, PostgreSQL ni Angular CLI  
+✅ **Reproducible** - Misma configuración en cualquier máquina  
+✅ **Aislado** - No conflictos con otras aplicaciones  
+✅ **Producción-ready** - Misma configuración en desarrollo y producción  
+
 ## 👨‍💻 Autor
 
 **Leonardo Quishpe**

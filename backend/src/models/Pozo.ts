@@ -1,11 +1,11 @@
 import { Pool } from 'pg';
 
 const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'gestion_pozos',
-  password: 'postleo',
-  port: 5432,
+  user: process.env.DB_USER || 'postgres',
+  host: process.env.DB_HOST || 'localhost',
+  database: process.env.DB_NAME || 'gestion_pozos',
+  password: process.env.DB_PASSWORD || 'postleo',
+  port: parseInt(process.env.DB_PORT || '5432'),
 });
 
 // Función para obtener todos los pozos
