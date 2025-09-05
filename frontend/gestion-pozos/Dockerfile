@@ -20,7 +20,10 @@ RUN npm run build
 FROM nginx:alpine
 
 # Copiar archivos build al directorio de nginx
-COPY --from=build /app/dist/gestion-pozos /usr/share/nginx/html
+COPY --from=build /app/dist/gestion-pozos/browser /usr/share/nginx/html
+
+# Eliminar configuración por defecto de nginx
+RUN rm /etc/nginx/conf.d/default.conf
 
 # Copiar configuración nginx personalizada
 COPY nginx.conf /etc/nginx/nginx.conf
