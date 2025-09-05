@@ -1,0 +1,71 @@
+<div class="agregar-pozo-container">
+  <h2>Agregar Nuevo Pozo</h2>
+  
+  <div *ngIf="mensaje" [class]="'mensaje ' + tipoMensaje">
+    {{mensaje}}
+  </div>
+  
+  <form class="pozo-form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="nombre">Nombre del Pozo:</label>
+      <input 
+        type="text" 
+        id="nombre" 
+        [(ngModel)]="pozo.nombre"
+        name="nombre"
+        placeholder="Ej: Pozo F"
+        required>
+    </div>
+    
+    <div class="form-group">
+      <label for="ubicacion">Ubicación:</label>
+      <input 
+        type="text" 
+        id="ubicacion" 
+        [(ngModel)]="pozo.ubicacion"
+        name="ubicacion"
+        placeholder="Ej: Bloque Norte"
+        required>
+    </div>
+    
+    <div class="form-group">
+      <label for="produccion">Producción Diaria (bbl):</label>
+      <input 
+        type="number" 
+        id="produccion" 
+        [(ngModel)]="pozo.produccion_diaria"
+        name="produccion_diaria"
+        placeholder="1200"
+        min="1"
+        required>
+    </div>
+    
+    <div class="form-group">
+      <label for="estado">Estado:</label>
+      <select 
+        id="estado" 
+        [(ngModel)]="pozo.estado"
+        name="estado"
+        required>
+        <option value="activo">Activo</option>
+        <option value="inactivo">Inactivo</option>
+        <option value="mantenimiento">Mantenimiento</option>
+      </select>
+    </div>
+    
+    <button 
+      type="submit" 
+      class="btn-submit"
+      [disabled]="loading">
+      {{loading ? 'Agregando...' : 'Agregar Pozo'}}
+    </button>
+    
+    <button 
+      type="button" 
+      class="btn-reset"
+      (click)="resetForm()"
+      [disabled]="loading">
+      Limpiar
+    </button>
+  </form>
+</div>

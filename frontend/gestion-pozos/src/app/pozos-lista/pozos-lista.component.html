@@ -1,0 +1,84 @@
+<div class="pozos-lista-container">
+  <div class="header-section">
+    <h2>Lista de Pozos Petroleros</h2>
+    
+    <div class="controles">
+      <label>Unidad de Producción:</label>
+      <select (change)="cambiarUnidad($any($event.target).value)" [value]="unidadProduccion">
+        <option value="barriles">Barriles (bbl)</option>
+        <option value="galones">Galones (gal)</option>
+        <option value="litros">Litros (L)</option>
+      </select>
+      
+      <button (click)="loadPozos()" class="refresh-btn" [disabled]="loading">
+        {{loading ? 'Cargando...' : '🔄 Actualizar'}}
+      </button>
+    </div>
+  </div>
+  
+  <div *ngIf="loading" class="loading">
+    <div class="loader"></div>
+    <p>Cargando pozos desde la API...</p>
+  </div>
+  
+  <div *ngIf="error" class="error">
+    <p>❌ Error al cargar los pozos. Verifique que el backend esté funcionando.</p>
+    <button (click)="loadPozos()" class="retry-btn">🔄 Reintentar</button>
+  </div>
+  
+  <div *ngIf="!loading && !error" class="tabla-container">
+    <table class="pozos-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Ubicación</th>
+          <th>Estado</th>
+          <th>Producción Diaria</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr 
+          *ngFor="let pozo of pozos" 
+          [appEstadoHighlight]="pozo.estado"
+          class="pozo-row">
+          <td class="id-cell">{{pozo.id}}</td>
+          <td class="nombre-cell">
+            <strong>{{pozo.nombre}}</strong>
+          </td>
+          <td class="ubicacion-cell">{{pozo.ubicacion}}</td>
+          <td class="estado-cell">
+            <span [class]="'estado-badge ' + getEstadoClass(pozo.estado)">
+              <span class="estado-icon">
+                {{pozo.estado === 'activo' ? '🟢' : pozo.estado === 'inactivo' ? '🔴' : '🟡'}}
+              </span>
+              {{pozo.estado | titlecase}}
+            </span>
+          </td>
+          <td class="produccion-cell">
+            <span class="produccion-valor">
+              {{pozo.produccion_diaria | produccionUnidades:unidadProduccion}}
+            </span>
+          </td>
+          <td class="acciones-cell">
+            <button 
+              class="toggle-estado-btn"
+              [class.activo]="pozo.estado === 'activo'"
+              [class.inactivo]="pozo.estado === 'inactivo'"
+              (click)="toggleEstado(pozo)"
+              [title]="'Cambiar a ' + (pozo.estado === 'activo' ? 'inactivo' : 'activo')">
+              {{pozo.estado === 'activo' ? '⏸️ Desactivar' : '▶️ Activar'}}
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div *ngIf="pozos.length === 0" class="no-pozos">
+      <div class="no-pozos-icon">📋</div>
+      <p>No hay pozos registrados en la base de datos.</p>
+      <p class="subtitle">Use el formulario "Agregar Pozo" para crear el primer registro.</p>
+    </div>
+  </div>
+</div>

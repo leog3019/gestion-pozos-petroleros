@@ -1,0 +1,93 @@
+<div class="estadisticas-container">
+  <h2>📊 Estadísticas de Pozos Petroleros</h2>
+  
+  <div *ngIf="loading" class="loading">
+    <div class="loader"></div>
+    <p>Calculando estadísticas...</p>
+  </div>
+  
+  <div *ngIf="error" class="error">
+    <p>❌ Error al cargar las estadísticas.</p>
+    <button (click)="loadEstadisticas()" class="retry-btn">🔄 Reintentar</button>
+  </div>
+  
+  <div *ngIf="!loading && !error" class="stats-content">
+    <!-- Resumen General -->
+    <div class="stats-summary">
+      <div class="summary-item">
+        <span class="label">Total de Pozos:</span>
+        <span class="value">{{stats.totalPozos}}</span>
+      </div>
+      <div class="summary-item">
+        <span class="label">Pozos Activos:</span>
+        <span class="value success">{{stats.pozosActivos}} ({{formatPercentage(stats.porcentajeActivos)}}%)</span>
+        <div class="progress-bar">
+          <div class="progress-fill success" [style.width.%]="stats.porcentajeActivos"></div>
+        </div>
+      </div>
+      <div class="summary-item">
+        <span class="label">Pozos Inactivos:</span>
+        <span class="value danger">{{stats.pozosInactivos}} ({{formatPercentage(stats.porcentajeInactivos)}}%)</span>
+        <div class="progress-bar">
+          <div class="progress-fill danger" [style.width.%]="stats.porcentajeInactivos"></div>
+        </div>
+      </div>
+      <div class="summary-item" *ngIf="stats.pozosMantenimiento > 0">
+        <span class="label">En Mantenimiento:</span>
+        <span class="value warning">{{stats.pozosMantenimiento}}</span>
+      </div>
+    </div>
+    
+    <!-- Separador -->
+    <hr class="section-divider">
+    
+    <!-- Producción -->
+    <div class="production-section">
+      <h3>Producción Diaria</h3>
+      <div class="production-grid">
+        <div class="production-item">
+          <span class="production-label">Total (Pozos Activos):</span>
+          <span class="production-value primary">{{stats.produccionTotal | produccionUnidades:'barriles'}}</span>
+        </div>
+        <div class="production-item">
+          <span class="production-label">Promedio por Pozo:</span>
+          <span class="production-value secondary">{{stats.promedioProduccion | produccionUnidades:'barriles'}}</span>
+        </div>
+      </div>
+      
+      <!-- Conversiones de unidades -->
+      <div class="units-conversion">
+        <h4>Conversiones de Unidades (Total)</h4>
+        <div class="conversion-grid">
+          <div class="conversion-item">
+            <span class="unit-label">Barriles:</span>
+            <span class="unit-value">{{stats.produccionTotal | produccionUnidades:'barriles'}}</span>
+          </div>
+          <div class="conversion-item">
+            <span class="unit-label">Galones:</span>
+            <span class="unit-value">{{stats.produccionTotal | produccionUnidades:'galones'}}</span>
+          </div>
+          <div class="conversion-item">
+            <span class="unit-label">Litros:</span>
+            <span class="unit-value">{{stats.produccionTotal | produccionUnidades:'litros'}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Sección de Observables (para cumplir requisito del PDF) -->
+    <div class="observables-section">
+      <h3>📡 Datos Reactivos (Observables)</h3>
+      <div class="reactive-data" *ngIf="estadisticas$ | async as reactiveStats">
+        <div class="reactive-row">
+          <span class="reactive-label">Eficiencia Operativa:</span>
+          <span class="reactive-value">{{formatPercentage(reactiveStats.porcentajeActivos)}}% de pozos activos</span>
+        </div>
+        <div class="reactive-row">
+          <span class="reactive-label">Producción Promedio:</span>
+          <span class="reactive-value">{{reactiveStats.promedioProduccion | produccionUnidades:'barriles'}} por pozo activo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
