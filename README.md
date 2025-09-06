@@ -7,8 +7,7 @@ Una aplicación fullstack moderna para la gestión y monitoreo de pozos petroler
 - **Gestión de Pozos**: Crear, listar y actualizar estados de pozos petroleros
 - **Estadísticas en Tiempo Real**: Visualización de porcentajes y producción diaria
 - **Conversión de Unidades**: Barriles, galones y litros automáticamente
-- **Interfaz Minimalista**: Diseño limpio y profesional sin distracciones
-- **API RESTful**: Backend robusto con validación de datos
+- **API RESTful**: Backend con validación de datos
 - **Base de Datos**: PostgreSQL para almacenamiento persistente
 
 ## 🏗️ Arquitectura del Proyecto
@@ -43,7 +42,6 @@ gestion_pozos/
 - **Angular 20** - Framework principal con componentes standalone
 - **TypeScript** - Tipado estático y mejores prácticas
 - **SCSS** - Estilos organizados y modulares
-- **RxJS** - Programación reactiva con Observables
 - **HTTP Client** - Comunicación con API backend
 
 ### Backend
@@ -188,7 +186,6 @@ Aplicación disponible en: `http://localhost:4200`
 - ✅ **Conversión de unidades** automática
 - ✅ **Validación de datos** en frontend y backend
 - ✅ **Diseño responsive** y minimalista
-- ✅ **Programación reactiva** con RxJS
 - ✅ **Arquitectura modular** y escalable
 
 ## 🔧 Scripts Disponibles
